@@ -1,0 +1,85 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Programs\\Unity\\Projects\\TheDreamDinner\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{98079496-072D-7F3C-B735-7477C6F5C4C3}|Assembly-CSharp.csproj|d:\\programs\\unity\\projects\\thedreamdinner\\assets\\files\\scripts\\lobbylistpanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98079496-072D-7F3C-B735-7477C6F5C4C3}|Assembly-CSharp.csproj|solutionrelative:assets\\files\\scripts\\lobbylistpanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98079496-072D-7F3C-B735-7477C6F5C4C3}|Assembly-CSharp.csproj|D:\\Programs\\Unity\\Projects\\TheDreamDinner\\assets\\files\\scripts\\lobbylistitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98079496-072D-7F3C-B735-7477C6F5C4C3}|Assembly-CSharp.csproj|solutionrelative:assets\\files\\scripts\\lobbylistitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98079496-072D-7F3C-B735-7477C6F5C4C3}|Assembly-CSharp.csproj|D:\\Programs\\Unity\\Projects\\TheDreamDinner\\assets\\files\\scripts\\entrypoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98079496-072D-7F3C-B735-7477C6F5C4C3}|Assembly-CSharp.csproj|solutionrelative:assets\\files\\scripts\\entrypoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98079496-072D-7F3C-B735-7477C6F5C4C3}|Assembly-CSharp.csproj|D:\\Programs\\Unity\\Projects\\TheDreamDinner\\assets\\files\\scripts\\lobbysession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98079496-072D-7F3C-B735-7477C6F5C4C3}|Assembly-CSharp.csproj|solutionrelative:assets\\files\\scripts\\lobbysession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "LobbyListItem.cs",
+              "DocumentMoniker": "D:\\Programs\\Unity\\Projects\\TheDreamDinner\\Assets\\Files\\Scripts\\LobbyListItem.cs",
+              "RelativeDocumentMoniker": "Assets\\Files\\Scripts\\LobbyListItem.cs",
+              "ToolTip": "D:\\Programs\\Unity\\Projects\\TheDreamDinner\\Assets\\Files\\Scripts\\LobbyListItem.cs",
+              "RelativeToolTip": "Assets\\Files\\Scripts\\LobbyListItem.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAwB4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-30T19:07:10.977Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "LobbyListPanel.cs",
+              "DocumentMoniker": "D:\\Programs\\Unity\\Projects\\TheDreamDinner\\Assets\\Files\\Scripts\\LobbyListPanel.cs",
+              "RelativeDocumentMoniker": "Assets\\Files\\Scripts\\LobbyListPanel.cs",
+              "ToolTip": "D:\\Programs\\Unity\\Projects\\TheDreamDinner\\Assets\\Files\\Scripts\\LobbyListPanel.cs",
+              "RelativeToolTip": "Assets\\Files\\Scripts\\LobbyListPanel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-30T18:58:36.701Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LobbySession.cs",
+              "DocumentMoniker": "D:\\Programs\\Unity\\Projects\\TheDreamDinner\\Assets\\Files\\Scripts\\LobbySession.cs",
+              "RelativeDocumentMoniker": "Assets\\Files\\Scripts\\LobbySession.cs",
+              "ToolTip": "D:\\Programs\\Unity\\Projects\\TheDreamDinner\\Assets\\Files\\Scripts\\LobbySession.cs",
+              "RelativeToolTip": "Assets\\Files\\Scripts\\LobbySession.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAIwH0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-30T18:01:02.9Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "EntryPoint.cs",
+              "DocumentMoniker": "D:\\Programs\\Unity\\Projects\\TheDreamDinner\\Assets\\Files\\Scripts\\EntryPoint.cs",
+              "RelativeDocumentMoniker": "Assets\\Files\\Scripts\\EntryPoint.cs",
+              "ToolTip": "D:\\Programs\\Unity\\Projects\\TheDreamDinner\\Assets\\Files\\Scripts\\EntryPoint.cs",
+              "RelativeToolTip": "Assets\\Files\\Scripts\\EntryPoint.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABQAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-30T18:00:50.309Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

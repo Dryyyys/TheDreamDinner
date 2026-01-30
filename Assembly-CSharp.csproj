@@ -64,9 +64,11 @@
     <Compile Include="Assets\Files\Scripts\LobbySession.cs" />
     <Compile Include="Assets\Files\Scripts\utils\Singleton.cs" />
     <Compile Include="Assets\Files\Scripts\EntryPoint.cs" />
+    <Compile Include="Assets\Files\Scripts\LobbyListItem.cs" />
     <Compile Include="Assets\Files\Scripts\UnityAuthenticator.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Files\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Files\Scripts\LobbyListPanel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

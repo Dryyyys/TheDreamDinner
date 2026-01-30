@@ -13,7 +13,7 @@ public class EntryPoint : MonoBehaviour
     public async void StartHost()
     {
         //NetworkManager.Singleton.StartHost();
-        bool succeeded = await LobbySession.Instance.CreateLobby(maxPlayers: 4, isPrivate: true, data: null); 
+        bool succeeded = await LobbySession.Instance.CreateLobby(maxPlayers: 4, isPrivate: false, data: null); 
 
         if(succeeded)
         {
