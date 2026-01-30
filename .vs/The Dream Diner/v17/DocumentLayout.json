@@ -1,0 +1,103 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Programs\\Unity\\Projects\\The Dream Diner\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{9F68F9C3-00FE-8461-30B9-FAB0FA5441F6}|Assembly-CSharp.csproj|D:\\Programs\\Unity\\Projects\\The Dream Diner\\assets\\files\\scripts\\entrypoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9F68F9C3-00FE-8461-30B9-FAB0FA5441F6}|Assembly-CSharp.csproj|solutionrelative:assets\\files\\scripts\\entrypoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9F68F9C3-00FE-8461-30B9-FAB0FA5441F6}|Assembly-CSharp.csproj|d:\\programs\\unity\\projects\\the dream diner\\assets\\files\\scripts\\lobbysession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9F68F9C3-00FE-8461-30B9-FAB0FA5441F6}|Assembly-CSharp.csproj|solutionrelative:assets\\files\\scripts\\lobbysession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9F68F9C3-00FE-8461-30B9-FAB0FA5441F6}|Assembly-CSharp.csproj|D:\\Programs\\Unity\\Projects\\The Dream Diner\\assets\\files\\scripts\\utils\\singleton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9F68F9C3-00FE-8461-30B9-FAB0FA5441F6}|Assembly-CSharp.csproj|solutionrelative:assets\\files\\scripts\\utils\\singleton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9F68F9C3-00FE-8461-30B9-FAB0FA5441F6}|Assembly-CSharp.csproj|D:\\Programs\\Unity\\Projects\\The Dream Diner\\assets\\files\\scripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9F68F9C3-00FE-8461-30B9-FAB0FA5441F6}|Assembly-CSharp.csproj|solutionrelative:assets\\files\\scripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9F68F9C3-00FE-8461-30B9-FAB0FA5441F6}|Assembly-CSharp.csproj|D:\\Programs\\Unity\\Projects\\The Dream Diner\\assets\\files\\scripts\\unityauthenticator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9F68F9C3-00FE-8461-30B9-FAB0FA5441F6}|Assembly-CSharp.csproj|solutionrelative:assets\\files\\scripts\\unityauthenticator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "LobbySession.cs",
+              "DocumentMoniker": "D:\\Programs\\Unity\\Projects\\The Dream Diner\\Assets\\Files\\Scripts\\LobbySession.cs",
+              "RelativeDocumentMoniker": "Assets\\Files\\Scripts\\LobbySession.cs",
+              "ToolTip": "D:\\Programs\\Unity\\Projects\\The Dream Diner\\Assets\\Files\\Scripts\\LobbySession.cs",
+              "RelativeToolTip": "Assets\\Files\\Scripts\\LobbySession.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAwA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-28T08:32:53.987Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Singleton.cs",
+              "DocumentMoniker": "D:\\Programs\\Unity\\Projects\\The Dream Diner\\Assets\\Files\\Scripts\\utils\\Singleton.cs",
+              "RelativeDocumentMoniker": "Assets\\Files\\Scripts\\utils\\Singleton.cs",
+              "ToolTip": "D:\\Programs\\Unity\\Projects\\The Dream Diner\\Assets\\Files\\Scripts\\utils\\Singleton.cs",
+              "RelativeToolTip": "Assets\\Files\\Scripts\\utils\\Singleton.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAuwBoAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-28T08:29:48.959Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PlayerController.cs",
+              "DocumentMoniker": "D:\\Programs\\Unity\\Projects\\The Dream Diner\\Assets\\Files\\Scripts\\PlayerController.cs",
+              "RelativeDocumentMoniker": "Assets\\Files\\Scripts\\PlayerController.cs",
+              "ToolTip": "D:\\Programs\\Unity\\Projects\\The Dream Diner\\Assets\\Files\\Scripts\\PlayerController.cs",
+              "RelativeToolTip": "Assets\\Files\\Scripts\\PlayerController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-28T08:18:40.942Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "EntryPoint.cs",
+              "DocumentMoniker": "D:\\Programs\\Unity\\Projects\\The Dream Diner\\Assets\\Files\\Scripts\\EntryPoint.cs",
+              "RelativeDocumentMoniker": "Assets\\Files\\Scripts\\EntryPoint.cs",
+              "ToolTip": "D:\\Programs\\Unity\\Projects\\The Dream Diner\\Assets\\Files\\Scripts\\EntryPoint.cs",
+              "RelativeToolTip": "Assets\\Files\\Scripts\\EntryPoint.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-28T08:18:41.177Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UnityAuthenticator.cs",
+              "DocumentMoniker": "D:\\Programs\\Unity\\Projects\\The Dream Diner\\Assets\\Files\\Scripts\\UnityAuthenticator.cs",
+              "RelativeDocumentMoniker": "Assets\\Files\\Scripts\\UnityAuthenticator.cs",
+              "ToolTip": "D:\\Programs\\Unity\\Projects\\The Dream Diner\\Assets\\Files\\Scripts\\UnityAuthenticator.cs",
+              "RelativeToolTip": "Assets\\Files\\Scripts\\UnityAuthenticator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-28T08:09:22.758Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
