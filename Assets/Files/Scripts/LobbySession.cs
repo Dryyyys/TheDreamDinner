@@ -13,6 +13,7 @@ public class LobbySession : Singleton<LobbySession>
     public event Action<Lobby> OnLobbyUpdated;
     public string LobbyCode => _lobby?.LobbyCode;
 
+    private Lobby _lastLobbySnapshot;
     private Lobby _lobby;
     private Coroutine _heartbeatCoroutine;
     private Coroutine _refreshCoroutine;
@@ -42,13 +43,37 @@ public class LobbySession : Singleton<LobbySession>
 
             Debug.Log($"Created lobby with ID: {_lobby.Id}");
         }
-        catch(System.Exception exception)
+        catch (Exception exception)
         {
             Debug.LogError($"Failed attempt to create lobby: {exception.Message}");
             return false;
         }
 
         return true;
+    }
+
+    public async Task<bool> JoinLobby(string lobbyId, Dictionary<string, string> data)
+    {
+        Dictionary<string, PlayerDataObject> playerData = SerializePlayerData(data);
+        Player player = new Player(AuthenticationService.Instance.PlayerId, null, playerData);
+        JoinLobbyByIdOptions joinOptions = new JoinLobbyByIdOptions()
+        {
+            Player = player
+        };
+
+        try
+        {
+            _lobby = await LobbyService.Instance.JoinLobbyByIdAsync(lobbyId, joinOptions);
+            Debug.Log($"Player with ID: {player.Id} joined the lobby {_lobby.Id}");
+            _isLobbyAlive = true;
+            _refreshCoroutine = StartCoroutine(RefreshLobbyCoroutine(_lobby.Id, _refreshInterval));
+            return true;
+        }
+        catch (Exception exception)
+        {
+            Debug.LogError($"Failed attempt to join lobby: {exception.Message}");
+            return false;
+        }
     }
 
     private IEnumerator HeartbeatLobbyCoroutine(string lobbyId, float interval)
@@ -81,8 +106,14 @@ public class LobbySession : Singleton<LobbySession>
 
             if (task.IsCompletedSuccessfully)
             {
-                _lobby = task.Result;
-                OnLobbyUpdated?.Invoke(_lobby); 
+                Lobby newLobby = task.Result;
+
+                if (HasLobbyChanged(_lastLobbySnapshot, newLobby))
+                {
+                    _lobby = newLobby;
+                    _lastLobbySnapshot = newLobby;
+                    OnLobbyUpdated?.Invoke(_lobby);
+                }
             }
             else
             {
@@ -95,11 +126,11 @@ public class LobbySession : Singleton<LobbySession>
 
     private Dictionary<string, PlayerDataObject> SerializePlayerData(Dictionary<string, string> data)
     {
-        if(data == null) return null;
+        if (data == null) return null;
 
         Dictionary<string, PlayerDataObject> playerData = new Dictionary<string, PlayerDataObject>();
 
-        foreach(KeyValuePair<string, string> kvp in data)
+        foreach (KeyValuePair<string, string> kvp in data)
         {
             PlayerDataObject dataObject = new PlayerDataObject(visibility: PlayerDataObject.VisibilityOptions.Member, value: kvp.Value);
             playerData.Add(kvp.Key, dataObject);
@@ -123,4 +154,25 @@ public class LobbySession : Singleton<LobbySession>
 
         _lobby = null;
     }
+
+    private bool HasLobbyChanged(Lobby oldLobby, Lobby newLobby)
+    {
+        if (oldLobby == null)
+            return true;
+
+        if (oldLobby.Players.Count != newLobby.Players.Count)
+            return true;
+
+        if (oldLobby.HostId != newLobby.HostId)
+            return true;
+
+        for (int i = 0; i < oldLobby.Players.Count; i++)
+        {
+            if (oldLobby.Players[i].Id != newLobby.Players[i].Id)
+                return true;
+        }
+
+        return false;
+    }
+
 }

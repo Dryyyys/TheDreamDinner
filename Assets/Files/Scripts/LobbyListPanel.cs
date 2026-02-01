@@ -9,12 +9,25 @@ using UnityEngine.UI;
 
 public class LobbyListPanel : MonoBehaviour
 {
-    [SerializeField] private GameObject _listPanel;
+    [SerializeField] private Transform _panelRoot;
     [SerializeField] private LobbyListItem _itemPrefab;
 
     [SerializeField] private Button _refreshLobbiesButton;
+    [SerializeField] private Button _createLobbyButton;
 
     private List<LobbyListItem> _lobbies = new List<LobbyListItem>();
+
+    private void OnEnable()
+    {
+        _refreshLobbiesButton.onClick.AddListener(RefreshLobbies);
+        _createLobbyButton.onClick.AddListener(CreateLobby);
+    }
+
+    private void OnDisable()
+    {
+        _createLobbyButton.onClick.RemoveListener(CreateLobby);
+        _refreshLobbiesButton.onClick.RemoveListener(RefreshLobbies);
+    }
 
     private async Task<List<Lobby>> QueryAvailableLobbies()
     {
@@ -37,9 +50,20 @@ public class LobbyListPanel : MonoBehaviour
 
     private LobbyListItem CreateLobbySlot(Lobby gameLobby)
     {
-        LobbyListItem item = Instantiate(_itemPrefab, _listPanel.transform);
+        LobbyListItem item = Instantiate(_itemPrefab, _panelRoot);
+        item.OnJoined += OnJoinedLobby;
         item.Init(gameLobby.Name, gameLobby.Players.Count, gameLobby.MaxPlayers, gameLobby);
         return item;
+    }
+
+    public async void CreateLobby()
+    {
+        bool succeeded = await LobbySession.Instance.CreateLobby(maxPlayers: 4, isPrivate: false, data: null);
+
+        if (succeeded)
+        {
+            // ??
+        }
     }
 
     public async void RefreshLobbies()
@@ -57,8 +81,16 @@ public class LobbyListPanel : MonoBehaviour
     private void ClearLobbiesList()
     {
         foreach (var item in _lobbies)
+        {
+            item.OnJoined -= OnJoinedLobby;
             Destroy(item.gameObject);
+        }
 
         _lobbies.Clear(); 
+    }
+
+    private void OnJoinedLobby(Lobby lobby)
+    {
+        // ?? 
     }
 }

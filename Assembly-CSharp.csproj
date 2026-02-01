@@ -62,8 +62,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Files\Scripts\LobbySession.cs" />
+    <Compile Include="Assets\Files\Scripts\LobbyHubPanel.cs" />
     <Compile Include="Assets\Files\Scripts\utils\Singleton.cs" />
     <Compile Include="Assets\Files\Scripts\EntryPoint.cs" />
+    <Compile Include="Assets\Files\Scripts\PlayerLobbyItem.cs" />
     <Compile Include="Assets\Files\Scripts\LobbyListItem.cs" />
     <Compile Include="Assets\Files\Scripts\UnityAuthenticator.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
