@@ -11,6 +11,10 @@ using UnityEngine;
 public class LobbySession : Singleton<LobbySession>
 {
     public event Action<Lobby> OnLobbyUpdated;
+    public event Action OnLobbyClosed;
+
+    public Lobby CurrentLobby => _lobby;
+
     public string LobbyCode => _lobby?.LobbyCode;
 
     private Lobby _lastLobbySnapshot;
@@ -76,6 +80,19 @@ public class LobbySession : Singleton<LobbySession>
         }
     }
 
+    public async Task LeaveLobby()
+    {
+        if (_lobby == null)
+            return;
+
+        bool isHost = _lobby.HostId == AuthenticationService.Instance.PlayerId;
+
+        if (!isHost)
+            await LobbyService.Instance.RemovePlayerAsync(_lobby.Id, AuthenticationService.Instance.PlayerId);
+
+        await DeleteLobbyAsync();
+    }
+
     private IEnumerator HeartbeatLobbyCoroutine(string lobbyId, float interval)
     {
         while (_isLobbyAlive)
@@ -87,6 +104,7 @@ public class LobbySession : Singleton<LobbySession>
 
             if (task.IsFaulted)
             {
+                _isLobbyAlive = false;
                 Debug.LogError("Heartbeat failed");
                 yield break;
             }
@@ -103,6 +121,14 @@ public class LobbySession : Singleton<LobbySession>
 
             while (!task.IsCompleted)
                 yield return null;
+
+            if (task.IsFaulted) 
+            {
+                Debug.Log("Lobby no longer exists");
+                _isLobbyAlive = false;
+                OnLobbyClosed?.Invoke();
+                yield break;
+            }
 
             if (task.IsCompletedSuccessfully)
             {
@@ -149,9 +175,15 @@ public class LobbySession : Singleton<LobbySession>
         if (_refreshCoroutine != null)
             StopCoroutine(_refreshCoroutine);
 
-        if (_lobby != null && _lobby.HostId == AuthenticationService.Instance.PlayerId)
-            await LobbyService.Instance.DeleteLobbyAsync(_lobby.Id);
+        string lobbyId = _lobby.Id;
 
+        if (_lobby != null && _lobby.HostId == AuthenticationService.Instance.PlayerId)
+        {
+            await LobbyService.Instance.DeleteLobbyAsync(_lobby.Id);
+            Debug.Log($"Lobby with ID: {lobbyId} was deleted");
+        }
+
+        _lastLobbySnapshot = null;
         _lobby = null;
     }
 

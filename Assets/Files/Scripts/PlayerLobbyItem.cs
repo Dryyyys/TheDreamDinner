@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
+using Unity.Mathematics;
 using Unity.Services.Authentication;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
@@ -21,7 +22,11 @@ public class PlayerLobbyItem : MonoBehaviour
 
     public void Init(Player player)
     {
-        _playerName.text = player.Profile.Name;
+        string playerName = player.Data != null && player.Data.TryGetValue("nickname", out var nickData)
+                ? nickData.Value
+                : "Unknown";
+
+        _playerName.text = playerName;
         _playerStatus.onValueChanged.AddListener(OnPlayerStatusChanged);
     }
 
@@ -31,8 +36,6 @@ public class PlayerLobbyItem : MonoBehaviour
             OnPlayerReady?.Invoke(_player);
         else
             OnPlayerNotReady?.Invoke(_player);
-
-        Debug.Log("hjsdfsd");
     }
 
     private void OnDestroy()

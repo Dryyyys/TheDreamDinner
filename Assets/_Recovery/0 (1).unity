@@ -529,6 +529,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EntryPoint
   authenticator: {fileID: 256928231}
+  coordinator: {fileID: 696268461}
 --- !u!4 &256928230
 Transform:
   m_ObjectHideFlags: 0
@@ -1927,6 +1928,7 @@ GameObject:
   - component: {fileID: 696268459}
   - component: {fileID: 696268458}
   - component: {fileID: 696268457}
+  - component: {fileID: 696268461}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2009,8 +2011,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 367416045}
   - {fileID: 1483280593}
+  - {fileID: 367416045}
   - {fileID: 304983919}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2019,6 +2021,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &696268461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 696268456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cad395ee7e063564e836feddaaf2e71b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WindowsCoordinator
+  _windows:
+  - {fileID: 1483280596}
+  - {fileID: 367416049}
 --- !u!1 &700356001
 GameObject:
   m_ObjectHideFlags: 0
@@ -3209,7 +3226,6 @@ MonoBehaviour:
   _playerPrefab: {fileID: 67323433657186077, guid: ee15cabf58ebc9c4da0af23f7d148443, type: 3}
   _lobbyNamePanel: {fileID: 1330183158}
   _startGameButton: {fileID: 58479020}
-  _closeLobbyButton: {fileID: 807318910}
 --- !u!1 &1493322017
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,16 +8,7 @@ public class EntryPoint : MonoBehaviour
     private async void Start()
     {
         await authenticator.SignIn();
-    }
-
-    public async void StartHost()
-    {
-        //NetworkManager.Singleton.StartHost();
 
     }
 
-    public void StartClient()
-    {
-        NetworkManager.Singleton.StartClient();
-    }
 }

@@ -11,6 +11,13 @@ public class UnityAuthenticator : MonoBehaviour
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
 
         bool signedIn = AuthenticationService.Instance.IsSignedIn;
+
+        if (signedIn)
+        {
+            string nickname = "Player";
+            await AuthenticationService.Instance.UpdatePlayerNameAsync(nickname);
+        }
+
         Debug.Log($"Signed in: {signedIn}");
 
         return signedIn;

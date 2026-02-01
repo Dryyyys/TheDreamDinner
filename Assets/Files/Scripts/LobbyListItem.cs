@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 public class LobbyListItem : MonoBehaviour
 {
-    public event Action<Lobby> OnJoined;
+    public event Action<Lobby> OnJoinedClickedAction;
 
     [SerializeField] private TextMeshProUGUI _lobbyNameText;
     [SerializeField] private TextMeshProUGUI _countPlayersText;
@@ -32,21 +32,9 @@ public class LobbyListItem : MonoBehaviour
         _joinButton.onClick.RemoveListener(OnJoinClicked);
     }
 
-    private async void OnJoinClicked()
+    private void OnJoinClicked()
     {
-        Dictionary<string, string> data = new Dictionary<string, string>(); // как что кого будем передавать ?
-
-        bool success = await JoinLobbyAsync(); // прокидывать события, если подключились или нет
-        if (success)
-        {
-            OnJoined?.Invoke(_lobby);
-        }
-
+        OnJoinedClickedAction?.Invoke(_lobby);
     }
 
-    private async Task<bool> JoinLobbyAsync()
-    {
-        Dictionary<string, string> data = new Dictionary<string, string>();
-        return await LobbySession.Instance.JoinLobby(_lobby.Id, data);
-    }
 }

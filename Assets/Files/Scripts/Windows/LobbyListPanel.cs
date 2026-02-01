@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
+using Unity.Services.Authentication;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
@@ -9,6 +10,8 @@ using UnityEngine.UI;
 
 public class LobbyListPanel : MonoBehaviour
 {
+    [SerializeField] private LobbyHubPanel _hubPanel;
+
     [SerializeField] private Transform _panelRoot;
     [SerializeField] private LobbyListItem _itemPrefab;
 
@@ -51,19 +54,36 @@ public class LobbyListPanel : MonoBehaviour
     private LobbyListItem CreateLobbySlot(Lobby gameLobby)
     {
         LobbyListItem item = Instantiate(_itemPrefab, _panelRoot);
-        item.OnJoined += OnJoinedLobby;
+        item.OnJoinedClickedAction += JoinLobby;
         item.Init(gameLobby.Name, gameLobby.Players.Count, gameLobby.MaxPlayers, gameLobby);
         return item;
     }
 
     public async void CreateLobby()
     {
-        bool succeeded = await LobbySession.Instance.CreateLobby(maxPlayers: 4, isPrivate: false, data: null);
+        var playerData = GetPlayerData();
+
+        bool succeeded = await LobbySession.Instance.CreateLobby(maxPlayers: 4, isPrivate: false, data: playerData);
 
         if (succeeded)
         {
-            // ??
+            _hubPanel.Open(LobbySession.Instance.CurrentLobby);
         }
+    }
+
+    public async void JoinLobby(Lobby lobby)
+    {
+        var playerData = GetPlayerData();
+        bool success = await JoinLobbyAsync(lobby, playerData); // прокидывать события, если подключились или нет
+        if (success)
+        {
+            _hubPanel.Open(lobby);
+        }
+    }
+
+    private async Task<bool> JoinLobbyAsync(Lobby lobby, Dictionary<string, string> data)
+    {
+        return await LobbySession.Instance.JoinLobby(lobby.Id, data);
     }
 
     public async void RefreshLobbies()
@@ -82,15 +102,20 @@ public class LobbyListPanel : MonoBehaviour
     {
         foreach (var item in _lobbies)
         {
-            item.OnJoined -= OnJoinedLobby;
+            item.OnJoinedClickedAction -= JoinLobby;
             Destroy(item.gameObject);
         }
 
         _lobbies.Clear(); 
     }
 
-    private void OnJoinedLobby(Lobby lobby)
+    private Dictionary<string, string> GetPlayerData()
     {
-        // ?? 
+        var data = new Dictionary<string, string>
+        {
+            { "nickname", AuthenticationService.Instance.PlayerName }
+        };
+
+        return data;
     }
 }
