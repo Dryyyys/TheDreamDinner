@@ -9,6 +9,8 @@ using UnityEngine.UI;
 
 public class LobbyHubPanel : MonoBehaviour
 {
+    public event Action PlayerDisconnected;
+
     [SerializeField] private Transform _panelRoot;
     [SerializeField] private PlayerLobbyItem _playerPrefab;
     [SerializeField] private TextMeshProUGUI _lobbyNamePanel;
@@ -21,15 +23,15 @@ public class LobbyHubPanel : MonoBehaviour
     private void OnEnable()
     {
         _closeLobbyButton.onClick.AddListener(Close);
-        LobbySession.Instance.OnLobbyUpdated += OnLobbyUpdated;
-        LobbySession.Instance.OnLobbyClosed += OnLobbyClosed;
+        GameLobby.Instance.LobbyUpdated += OnLobbyUpdated;
+        GameLobby.Instance.LobbyClosed += OnLobbyClosed;
     }
 
     private void OnDisable()
     {
         _closeLobbyButton.onClick.RemoveListener(Close);
-        LobbySession.Instance.OnLobbyUpdated -= OnLobbyUpdated;
-        LobbySession.Instance.OnLobbyClosed -= OnLobbyClosed;
+        GameLobby.Instance.LobbyUpdated -= OnLobbyUpdated;
+        GameLobby.Instance.LobbyClosed -= OnLobbyClosed;
     }
 
     private void OnLobbyUpdated(Lobby lobby)
@@ -51,6 +53,7 @@ public class LobbyHubPanel : MonoBehaviour
     {
         await LobbySession.Instance.LeaveLobby();
         CLearPlayersItems();
+        PlayerDisconnected?.Invoke();
         gameObject.SetActive(false);
     }
 
@@ -58,6 +61,7 @@ public class LobbyHubPanel : MonoBehaviour
     {
         await LobbySession.Instance.DeleteLobbyAsync();
         CLearPlayersItems();
+        PlayerDisconnected?.Invoke();
         gameObject.SetActive(false);
     }
 

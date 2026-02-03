@@ -18,37 +18,20 @@ public class LobbyListPanel : MonoBehaviour
     [SerializeField] private Button _refreshLobbiesButton;
     [SerializeField] private Button _createLobbyButton;
 
-    private List<LobbyListItem> _lobbies = new List<LobbyListItem>();
+    private List<LobbyListItem> _lobbiesItems = new List<LobbyListItem>();
 
     private void OnEnable()
     {
         _refreshLobbiesButton.onClick.AddListener(RefreshLobbies);
         _createLobbyButton.onClick.AddListener(CreateLobby);
+        _hubPanel.PlayerDisconnected += RefreshLobbies;
     }
 
     private void OnDisable()
     {
         _createLobbyButton.onClick.RemoveListener(CreateLobby);
         _refreshLobbiesButton.onClick.RemoveListener(RefreshLobbies);
-    }
-
-    private async Task<List<Lobby>> QueryAvailableLobbies()
-    {
-        try
-        {
-            QueryLobbiesOptions options = new QueryLobbiesOptions
-            {
-                Count = 10 // что будем делать с количеством ? ћб ещЄ какие-то параметры ?
-            };
-
-            QueryResponse response = await LobbyService.Instance.QueryLobbiesAsync(options);
-            return response.Results;
-        }
-        catch (Exception e)
-        {
-            Debug.LogError($"Failed to query lobbies: {e.Message}");
-            return new List<Lobby>();
-        }
+        _hubPanel.PlayerDisconnected -= RefreshLobbies;
     }
 
     private LobbyListItem CreateLobbySlot(Lobby gameLobby)
@@ -61,61 +44,37 @@ public class LobbyListPanel : MonoBehaviour
 
     public async void CreateLobby()
     {
-        var playerData = GetPlayerData();
-
-        bool succeeded = await LobbySession.Instance.CreateLobby(maxPlayers: 4, isPrivate: false, data: playerData);
-
-        if (succeeded)
-        {
+        if (await GameLobby.Instance.TryCreateLobby())
             _hubPanel.Open(LobbySession.Instance.CurrentLobby);
-        }
     }
 
     public async void JoinLobby(Lobby lobby)
     {
-        var playerData = GetPlayerData();
-        bool success = await JoinLobbyAsync(lobby, playerData); // прокидывать событи€, если подключились или нет
-        if (success)
-        {
+        if (await GameLobby.Instance.TryJoinLobby(lobby))
             _hubPanel.Open(lobby);
-        }
-    }
-
-    private async Task<bool> JoinLobbyAsync(Lobby lobby, Dictionary<string, string> data)
-    {
-        return await LobbySession.Instance.JoinLobby(lobby.Id, data);
     }
 
     public async void RefreshLobbies()
     {
         ClearLobbiesList();
-        List<Lobby> lobbies = await QueryAvailableLobbies();
-        Debug.Log($"Was founded {lobbies.Count} lobbies");
+        List<Lobby> lobbies = await GameLobby.Instance.QueryAvailableLobbies();
+
         foreach (Lobby lobby in lobbies)
         {
             LobbyListItem item = CreateLobbySlot(lobby);
-            _lobbies.Add(item);
+            _lobbiesItems.Add(item);
         }
     }
 
     private void ClearLobbiesList()
     {
-        foreach (var item in _lobbies)
+        foreach (var item in _lobbiesItems)
         {
             item.OnJoinedClickedAction -= JoinLobby;
             Destroy(item.gameObject);
         }
 
-        _lobbies.Clear(); 
+        _lobbiesItems.Clear(); 
     }
 
-    private Dictionary<string, string> GetPlayerData()
-    {
-        var data = new Dictionary<string, string>
-        {
-            { "nickname", AuthenticationService.Instance.PlayerName }
-        };
-
-        return data;
-    }
 }

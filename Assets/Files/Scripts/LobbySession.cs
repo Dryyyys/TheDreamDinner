@@ -10,9 +10,6 @@ using UnityEngine;
 
 public class LobbySession : Singleton<LobbySession>
 {
-    public event Action<Lobby> OnLobbyUpdated;
-    public event Action OnLobbyClosed;
-
     public Lobby CurrentLobby => _lobby;
 
     public string LobbyCode => _lobby?.LobbyCode;
@@ -24,7 +21,7 @@ public class LobbySession : Singleton<LobbySession>
 
     private bool _isLobbyAlive;
 
-    private float _heartbeatInterval = 30f;
+    private float _heartbeatInterval = 30f;  
     private float _refreshInterval = 1f;
 
     public async Task<bool> CreateLobby(int maxPlayers, bool isPrivate, Dictionary<string, string> data)
@@ -126,7 +123,7 @@ public class LobbySession : Singleton<LobbySession>
             {
                 Debug.Log("Lobby no longer exists");
                 _isLobbyAlive = false;
-                OnLobbyClosed?.Invoke();
+                LobbyEvents.RaiseLobbyClosed();
                 yield break;
             }
 
@@ -138,7 +135,7 @@ public class LobbySession : Singleton<LobbySession>
                 {
                     _lobby = newLobby;
                     _lastLobbySnapshot = newLobby;
-                    OnLobbyUpdated?.Invoke(_lobby);
+                    LobbyEvents.RaiseLobbyUpdated(_lobby);
                 }
             }
             else
@@ -205,6 +202,26 @@ public class LobbySession : Singleton<LobbySession>
         }
 
         return false;
+    }
+
+    public List<Dictionary<string, PlayerDataObject>> GetPlayersData()
+    {
+        List<Dictionary<string, PlayerDataObject>> data = new List<Dictionary<string, PlayerDataObject>>();
+
+        foreach(Player player in _lobby.Players)
+            data.Add(player.Data);
+        
+        return data;
+    }
+
+    public Dictionary<string, string> GetCurrentPlayerData()
+    {
+        string id = AuthenticationService.Instance.PlayerId;
+        string name = AuthenticationService.Instance.PlayerName;
+
+        LobbyPlayerData lobbyPlayerData = new LobbyPlayerData(id, name);
+
+        return lobbyPlayerData.Serialize();
     }
 
 }
