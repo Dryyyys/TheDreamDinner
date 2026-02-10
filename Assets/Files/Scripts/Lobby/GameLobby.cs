@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Unity.Services.Authentication;
 using Unity.Services.Lobbies;
@@ -10,6 +11,10 @@ public class GameLobby : Singleton<GameLobby>
 {
     public event Action<Lobby> LobbyUpdated;
     public event Action LobbyClosed;
+
+    public bool IsPlayerHost => AuthenticationService.Instance.PlayerId == LobbySession.Instance.CurrentLobby.HostId;
+    public bool IsAllPlayersReady => _lobbyPlayerDatas.All(x => x.IsReady);
+    public List<LobbyPlayerData> LobbyPlayers => _lobbyPlayerDatas;
 
     private List<LobbyPlayerData> _lobbyPlayerDatas = new();
     private LobbyPlayerData _localPlayerData;
@@ -68,14 +73,13 @@ public class GameLobby : Singleton<GameLobby>
 
     private void OnLobbyUpdated(Lobby lobby)
     {
-        List<Dictionary<string, PlayerDataObject>> playerData = LobbySession.Instance.GetPlayersData();
         _lobbyPlayerDatas.Clear();
 
-        foreach (var data in playerData)
+        foreach (var player in lobby.Players)
         {
-            LobbyPlayerData lobbyPlayerData = new LobbyPlayerData(data);
+            var lobbyPlayerData = new LobbyPlayerData(player.Data);
 
-            if(lobbyPlayerData.Id == AuthenticationService.Instance.PlayerId)
+            if (player.Id == AuthenticationService.Instance.PlayerId)
                 _localPlayerData = lobbyPlayerData;
 
             _lobbyPlayerDatas.Add(lobbyPlayerData);
@@ -84,4 +88,10 @@ public class GameLobby : Singleton<GameLobby>
         LobbyUpdated?.Invoke(lobby);
     }
 
+    public async Task<bool> SetPlayerReadyStatus(bool isReady)
+    {
+        _localPlayerData.IsReady = isReady;
+        LobbyUpdated?.Invoke(LobbySession.Instance.CurrentLobby);
+        return await LobbySession.Instance.UpdatePlayerData(_localPlayerData.Id, _localPlayerData.GetData());
+    }    
 }

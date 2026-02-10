@@ -10,5 +10,4 @@ public class LobbyEvents
     public static void RaiseLobbyUpdated(Lobby lobby) => OnLobbyUpdated?.Invoke(lobby);
     public static void RaiseLobbyClosed() => OnLobbyClosed?.Invoke();
 
-
 }

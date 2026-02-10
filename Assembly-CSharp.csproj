@@ -61,20 +61,20 @@
     <Analyzer Include="D:\Programs\Unity\Hub\Editor\6000.2.10f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Files\Scripts\GameLobby.cs" />
     <Compile Include="Assets\Files\Scripts\Windows\LobbyHubPanel.cs" />
-    <Compile Include="Assets\Files\Scripts\LobbySession.cs" />
+    <Compile Include="Assets\Files\Scripts\Lobby\LobbySession.cs" />
+    <Compile Include="Assets\Files\Scripts\Lobby\GameLobby.cs" />
+    <Compile Include="Assets\Files\Scripts\ListItems\LobbyListItem.cs" />
+    <Compile Include="Assets\Files\Scripts\Consts\LobbyPlayerKeys.cs" />
     <Compile Include="Assets\Files\Scripts\utils\Singleton.cs" />
     <Compile Include="Assets\Files\Scripts\EntryPoint.cs" />
-    <Compile Include="Assets\Files\Scripts\PlayerLobbyItem.cs" />
+    <Compile Include="Assets\Files\Scripts\Consts\LobbyEvents.cs" />
     <Compile Include="Assets\Files\Scripts\Windows\LobbyListPanel.cs" />
-    <Compile Include="Assets\Files\Scripts\LobbyListItem.cs" />
     <Compile Include="Assets\Files\Scripts\UnityAuthenticator.cs" />
     <Compile Include="Assets\Files\Scripts\Data\LobbyPlayerData.cs" />
-    <Compile Include="Assets\Files\Scripts\LobbyPlayerKeys.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\Files\Scripts\ListItems\PlayerLobbyItem.cs" />
     <Compile Include="Assets\Files\Scripts\PlayerController.cs" />
-    <Compile Include="Assets\Files\Scripts\LobbyEvents.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -406,7 +406,7 @@ GameObject:
   - component: {fileID: 3108418040306850011}
   - component: {fileID: 840250406210353963}
   - component: {fileID: 6454979047764696023}
-  - component: {fileID: 3795159224482052712}
+  - component: {fileID: 362301362277081544}
   m_Layer: 5
   m_Name: LobbyItem
   m_TagString: Untagged
@@ -434,7 +434,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 648.5974, y: -77.745}
-  m_SizeDelta: {x: 1046.105, y: 155.49}
+  m_SizeDelta: {x: 0, y: 155.49}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6483043299870859476
 CanvasRenderer:
@@ -514,7 +514,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
   m_HorizontalFit: 2
   m_VerticalFit: 0
---- !u!114 &3795159224482052712
+--- !u!114 &362301362277081544
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -523,9 +523,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6439774053035682003}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0940d6a8e572a404baeb9700771d67a6, type: 3}
+  m_Script: {fileID: 11500000, guid: 3456f563ce1b16e4d84015d144ef690a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
+  m_EditorClassIdentifier: Assembly-CSharp::LobbyListItem
   _lobbyNameText: {fileID: 6829278487664141160}
   _countPlayersText: {fileID: 6388248495737175312}
   _joinButton: {fileID: 3539151500983124455}

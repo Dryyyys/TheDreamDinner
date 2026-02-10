@@ -39,7 +39,7 @@ public class LobbyPlayerData
             bool.TryParse(ready.Value, out _isReady);
     }
 
-    public Dictionary<string, string> Serialize()
+    public Dictionary<string, string> GetData()
     {
         return new()
         {

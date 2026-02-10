@@ -14,7 +14,6 @@ public class LobbySession : Singleton<LobbySession>
 
     public string LobbyCode => _lobby?.LobbyCode;
 
-    private Lobby _lastLobbySnapshot;
     private Lobby _lobby;
     private Coroutine _heartbeatCoroutine;
     private Coroutine _refreshCoroutine;
@@ -41,7 +40,7 @@ public class LobbySession : Singleton<LobbySession>
             _isLobbyAlive = true;
             _heartbeatCoroutine = StartCoroutine(HeartbeatLobbyCoroutine(_lobby.Id, _heartbeatInterval));
             _refreshCoroutine = StartCoroutine(RefreshLobbyCoroutine(_lobby.Id, _refreshInterval));
-
+            LobbyEvents.RaiseLobbyUpdated(_lobby);
             Debug.Log($"Created lobby with ID: {_lobby.Id}");
         }
         catch (Exception exception)
@@ -68,6 +67,7 @@ public class LobbySession : Singleton<LobbySession>
             Debug.Log($"Player with ID: {player.Id} joined the lobby {_lobby.Id}");
             _isLobbyAlive = true;
             _refreshCoroutine = StartCoroutine(RefreshLobbyCoroutine(_lobby.Id, _refreshInterval));
+            LobbyEvents.RaiseLobbyUpdated(_lobby);
             return true;
         }
         catch (Exception exception)
@@ -130,13 +130,8 @@ public class LobbySession : Singleton<LobbySession>
             if (task.IsCompletedSuccessfully)
             {
                 Lobby newLobby = task.Result;
-
-                if (HasLobbyChanged(_lastLobbySnapshot, newLobby))
-                {
-                    _lobby = newLobby;
-                    _lastLobbySnapshot = newLobby;
-                    LobbyEvents.RaiseLobbyUpdated(_lobby);
-                }
+                _lobby = newLobby;
+                LobbyEvents.RaiseLobbyUpdated(_lobby);
             }
             else
             {
@@ -180,28 +175,8 @@ public class LobbySession : Singleton<LobbySession>
             Debug.Log($"Lobby with ID: {lobbyId} was deleted");
         }
 
-        _lastLobbySnapshot = null;
+        //_lastLobbySnapshot = null;
         _lobby = null;
-    }
-
-    private bool HasLobbyChanged(Lobby oldLobby, Lobby newLobby)
-    {
-        if (oldLobby == null)
-            return true;
-
-        if (oldLobby.Players.Count != newLobby.Players.Count)
-            return true;
-
-        if (oldLobby.HostId != newLobby.HostId)
-            return true;
-
-        for (int i = 0; i < oldLobby.Players.Count; i++)
-        {
-            if (oldLobby.Players[i].Id != newLobby.Players[i].Id)
-                return true;
-        }
-
-        return false;
     }
 
     public List<Dictionary<string, PlayerDataObject>> GetPlayersData()
@@ -221,7 +196,28 @@ public class LobbySession : Singleton<LobbySession>
 
         LobbyPlayerData lobbyPlayerData = new LobbyPlayerData(id, name);
 
-        return lobbyPlayerData.Serialize();
+        return lobbyPlayerData.GetData();
     }
 
+    public async Task<bool> UpdatePlayerData(string playerId, Dictionary<string, string> data)
+    {
+        Dictionary<string, PlayerDataObject> playerData = SerializePlayerData(data);
+
+        UpdatePlayerOptions updatePlayerOptions = new UpdatePlayerOptions()
+        {
+            Data = playerData
+        };
+
+        try
+        {
+            _lobby = await LobbyService.Instance.UpdatePlayerAsync(_lobby.Id, playerId, updatePlayerOptions);
+            LobbyEvents.RaiseLobbyUpdated(_lobby);
+            return true;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Failed attempt to update player data (player id = {playerId}) : {e.Message}");
+            return false;
+        }
+    }
 }

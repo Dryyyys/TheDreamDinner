@@ -822,7 +822,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LobbyListPanel
   _hubPanel: {fileID: 1483280596}
   _panelRoot: {fileID: 1691471696}
-  _itemPrefab: {fileID: 3795159224482052712, guid: 590cf539efd3a7b4cb8f13fa87455b29, type: 3}
+  _itemPrefab: {fileID: 362301362277081544, guid: 590cf539efd3a7b4cb8f13fa87455b29, type: 3}
   _refreshLobbiesButton: {fileID: 461744667}
   _createLobbyButton: {fileID: 1301734003}
 --- !u!1 &410087039
@@ -3206,7 +3206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LobbyHubPanel
   _panelRoot: {fileID: 700356002}
-  _playerPrefab: {fileID: 67323433657186077, guid: ee15cabf58ebc9c4da0af23f7d148443, type: 3}
+  _playerPrefab: {fileID: 5092118330509822998, guid: ee15cabf58ebc9c4da0af23f7d148443, type: 3}
   _lobbyNamePanel: {fileID: 1330183158}
   _startGameButton: {fileID: 58479020}
   _closeLobbyButton: {fileID: 807318910}

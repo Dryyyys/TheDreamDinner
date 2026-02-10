@@ -10,5 +10,4 @@ public class EntryPoint : MonoBehaviour
         await authenticator.SignIn();
 
     }
-
 }
